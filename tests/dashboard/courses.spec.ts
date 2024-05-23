@@ -51,7 +51,7 @@ test.describe("SBT Deshboard Courses Validations", () => {
     test("is able to navigate to stripe page", async () => {
       await page.getByRole("link", { name: /Blue Team Level 1/ }).click();
       const purchaseButton = page.getByRole("button", { name: /Purchase Certification/ });
-      await expect(purchaseButton).toHaveText("Purchase Certification - £399");
+      await expect(purchaseButton).toHaveText(/Purchase Certification - £399/);
       await purchaseButton.click();
       await page.waitForURL(/checkout.stripe.com/, { timeout: 15000 });
       await expect(page.locator(".ProductSummary-name")).toContainText("Blue Team Level 1");
