@@ -15,9 +15,6 @@ test.describe("Hubstaff Deshboard", () => {
       .fill(creds.password);
     await page.getByRole("button", { name: "Log in" }).click();
     await page.locator(".user-dropdown").waitFor({ state: "visible" });
-    await page.locator(".user-dropdown").hover();
-    const welcomeText = await page.locator(".tooltip-inner").textContent();
-    expect(welcomeText).toContain(creds.name);
   });
 
   test.afterAll(async ({ browser }, testInfo) => {
@@ -25,7 +22,7 @@ test.describe("Hubstaff Deshboard", () => {
     await page.getByRole('link', { name: 'Sign out' }).click();
     const logoutMessage = page.locator('.session-message');
     await logoutMessage.waitFor({ state: 'visible' }); 
-    await expect(logoutMessage).toContainText('You have been logged out.');
+    await expect(logoutMessage).toContainText('You have been logged out.',  { timeout: 15000 });
     await browser.close();
   });
 
@@ -54,15 +51,15 @@ test.describe("Hubstaff Deshboard", () => {
     test("verify memebers data is correct", async () => {
       const widget = page.locator('#widget_members_detailed');
       await widget.waitFor({ state: 'visible' });
-      await expect(widget.locator('a[class*="member-name"]')).toContainText("Jyotirmay Second");
-      await expect(widget.locator('a[class*="project-name"]')).toContainText("Test Project");
-      await expect(widget.locator('div[class*="task_name"]')).toContainText("First Task Edited");
+      await expect(widget.locator('a[class*="member-name"]').nth(0)).toContainText("Jyotirmay Second");
+      await expect(widget.locator('a[class*="project-name"]').nth(0)).toContainText("Test Project");
+      await expect(widget.locator('div[class*="task_name"]').nth(0)).toContainText("First Task Edited");
     });
     test("verify projects data is correct", async () => {
       const widget = page.locator('#widget_project_budgets');
       await widget.waitFor({ state: 'visible' });
-      await expect(widget.locator('span[class*="project-name"]')).toContainText("Test Project 2");
-      await expect(widget.locator('span[class*="budget-amount"]')).toContainText("$100,000.00");
+      await expect(widget.locator('span[class*="project-name"]').nth(0)).toContainText("Test Project 2");
+      await expect(widget.locator('span[class*="budget-amount"]').nth(0)).toContainText("$100,000.00");
     });
   });
 

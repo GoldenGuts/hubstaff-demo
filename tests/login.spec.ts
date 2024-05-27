@@ -2,7 +2,7 @@ import playwright from "playwright";
 import { test, expect } from "@playwright/test";
 import { creds } from "../data/credentials";
 
-test.describe("SBT Deshboard", () => {
+test.describe("Hubstaff Login", () => {
   let page: playwright.Page;
 
   test.beforeAll(async ({ browser }) => {
