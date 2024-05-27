@@ -1,4 +1,4 @@
-# SBT Dashboard Tests
+# Hubstaff Automation Demo
 
 This repository contains automated tests for the Hubstaff Platform. The tests are designed to validate functionality as specified in the provided test cases and reported issues.
 
